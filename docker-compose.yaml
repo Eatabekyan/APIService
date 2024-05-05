@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres:13.3
+    restart: always
+    environment:
+      POSTGRES_USER: ${DBUSER}
+      POSTGRES_DB: ${DBNAME}
+      POSTGRES_PASSWORD: ${DBPASSWORD}
+    ports:
+      - "${DBPORT}:5432"
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer:4.8.1
+    restart: always
+    ports:
+      - ${ADMINER_PORT}:8080
+    
