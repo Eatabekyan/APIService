@@ -103,20 +103,21 @@ curl -d @removeServicesRequest.json -H 'Content-Type:application/json' http://lo
 
 #### Client requests are served on port 7001:
 
-Once the service is running, you will find scripts and request examples for each action that can be performed as an ***client service***.
+Once the service is running, you will find scripts and request examples for each action that can be performed as a ***client service***.
 
 #### Check User Access
 
-Before checking user access "client service" must get `TOKEN` from OAUTH2 server that is running on 9096 port.
+Before checking user access, the "client service" must obtain a `TOKEN` from the OAuth2 server running on port 9096.
 
-This is shell script example how to get Token by `clientId` & `secret`
+Here is a shell script example of how to obtain a Token using `clientId` and `secret`:
 
 ```bash
-    curl -X POST   http://localhost:9096/token   -H 'Content-Type: application/x-www-form-urlencoded'   -d 'grant_type=client_credentials&client_id=000000&client_secret=999999'
+curl -X POST   http://localhost:9096/token   -H 'Content-Type: application/x-www-form-urlencoded'   -d 'grant_type=client_credentials&client_id=000000&client_secret=999999'
 ```
-Or you can check it by following the link: http://localhost:9096/token?grant_type=client_credentials&client_id=000000&client_secret=999999&scope=read
 
-OAUTH2 Server Response:
+Alternatively, you can obtain the token by following this link: [http://localhost:9096/token?grant_type=client_credentials&client_id=000000&client_secret=999999&scope=read](http://localhost:9096/token?grant_type=client_credentials&client_id=000000&client_secret=999999&scope=read)
+
+OAuth2 Server Response:
 ```json
 {
   "access_token": "YTHMNDFMNTITZTYYNS0ZNME2LWEYMZITOTDKMGNLZTG5MGI2",
@@ -126,15 +127,15 @@ OAUTH2 Server Response:
 }
 ```
 
-After getting token "client service" can make request to our "access service" on 7001 port:
+After obtaining the token, the "client service" can make a request to our "access service" on port 7001:
 
-Request example in bash script:
+Request example in a bash script:
 
 ```bash
-    curl -d @clientRequest.json -H 'Content-Type:application/json' http://localhost:7001/checkUserAccess
+curl -d @clientRequest.json -H 'Content-Type:application/json' http://localhost:7001/checkUserAccess
 ```
 
-clientRequest.json
+`clientRequest.json`:
 ```json
 {
     "username": "admin",
