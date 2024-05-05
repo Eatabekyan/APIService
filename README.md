@@ -117,6 +117,8 @@ curl -X POST   http://localhost:9096/token   -H 'Content-Type: application/x-www
 
 Alternatively, you can obtain the token by following this link: [http://localhost:9096/token?grant_type=client_credentials&client_id=000000&client_secret=999999&scope=read](http://localhost:9096/token?grant_type=client_credentials&client_id=000000&client_secret=999999&scope=read)
 
+*I've decided to use OAuth2 because OpenId is a wrapper over it.*
+
 OAuth2 Server Response:
 ```json
 {
