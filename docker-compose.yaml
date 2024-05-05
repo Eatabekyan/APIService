@@ -1,4 +1,31 @@
 services:
+  accessing:
+    image: accessing
+    build:
+      context: ./accessing
+      dockerfile: Dockerfile
+    env_file:
+     - .env 
+    ports:
+      - ${CLIENT_PORT}:${CLIENT_PORT}
+      - ${ADMIN_PORT}:${ADMIN_PORT}
+    networks:
+      - app-network
+    
+  oauth2_server:
+    image: oauth2_server
+    build:
+      context: ./oauth2_server
+      dockerfile: Dockerfile
+    env_file:
+      - .env 
+    ports:
+      - ${OAUTH_SERVER_PORT}:${OAUTH_SERVER_PORT}
+    networks:
+      - app-network
+      
+    
+    
   postgres:
     image: postgres:13.3
     restart: always
@@ -10,10 +37,17 @@ services:
       - "${DBPORT}:5432"
     volumes:
       - ./postgres:/var/lib/postgresql/data
-
+    networks:
+      - app-network
+  
   adminer:
     image: adminer:4.8.1
     restart: always
     ports:
       - ${ADMINER_PORT}:8080
-    
+
+networks:
+  app-network:
+    driver: bridge
+
+
