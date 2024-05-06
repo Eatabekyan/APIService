@@ -1,7 +1,7 @@
 package dbconnect
 
 import (
-	"accessing/dbtypes"
+	"accessing/pkg/dbtypes"
 	"errors"
 
 	pgx "github.com/jackc/pgx/v5"

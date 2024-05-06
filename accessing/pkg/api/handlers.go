@@ -1,7 +1,7 @@
 package api
 
 import (
-	"accessing/dbconnect"
+	"accessing/pkg/dbconnect"
 	"fmt"
 
 	"net/http"

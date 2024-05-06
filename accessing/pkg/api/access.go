@@ -1,7 +1,7 @@
 package api
 
 import (
-	"accessing/dbtypes"
+	"accessing/pkg/dbtypes"
 	"encoding/json"
 	"fmt"
 	"io"

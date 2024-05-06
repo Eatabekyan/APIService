@@ -1,8 +1,8 @@
 package main
 
 import (
-	"accessing/api"
-	"accessing/dbconnect"
+	"accessing/pkg/api"
+	"accessing/pkg/dbconnect"
 	"fmt"
 	"os"
 	"sync"
@@ -14,7 +14,7 @@ import (
 
 var (
 	wg      sync.WaitGroup
-	logFile = "/accessing/service_logs.log"
+	logFile = "/accessing/logs/service_logs.log"
 	logger  = log.New()
 )
 

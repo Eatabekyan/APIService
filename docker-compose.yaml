@@ -9,6 +9,8 @@ services:
     ports:
       - ${CLIENT_PORT}:${CLIENT_PORT}
       - ${ADMIN_PORT}:${ADMIN_PORT}
+    volumes:
+      - ./accessing/logs:/accessing/logs
     networks:
       - app-network
     
@@ -23,7 +25,7 @@ services:
       - ${OAUTH_SERVER_PORT}:${OAUTH_SERVER_PORT}
     networks:
       - app-network
-      
+    
     
     
   postgres:
