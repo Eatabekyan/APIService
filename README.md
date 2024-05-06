@@ -137,10 +137,15 @@ Request example in a bash script:
 curl -d @clientRequest.json -H 'Content-Type:application/json' http://localhost:7001/checkUserAccess
 ```
 
-`clientRequest.json`:
+***clientRequest.json***:
 ```json
 {
     "username": "admin",
     "token":"ZDU2ZJG1ZJITZTC2MI0ZNZJJLTLJYZUTZWU3MZC2OGY1ZDZI"
 }
 ```
+
+
+
+`Important:`
+        After running project all the logs of accessing service are written in */logs/service_logs.log*

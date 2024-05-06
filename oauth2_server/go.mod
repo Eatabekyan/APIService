@@ -1,4 +1,4 @@
-module oauth
+module oauth2_server
 
 go 1.22.2
 
@@ -10,7 +10,6 @@ require (
 require (
 	github.com/golang-jwt/jwt v3.2.1+incompatible // indirect
 	github.com/google/uuid v1.1.1 // indirect
-	github.com/joho/godotenv v1.5.1 // indirect
 	github.com/tidwall/btree v0.0.0-20191029221954-400434d76274 // indirect
 	github.com/tidwall/buntdb v1.1.2 // indirect
 	github.com/tidwall/gjson v1.12.1 // indirect

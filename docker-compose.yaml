@@ -10,7 +10,7 @@ services:
       - ${CLIENT_PORT}:${CLIENT_PORT}
       - ${ADMIN_PORT}:${ADMIN_PORT}
     volumes:
-      - ./accessing/logs:/accessing/logs
+      - ./logs:/accessing/logs
     networks:
       - app-network
     
@@ -38,7 +38,7 @@ services:
     ports:
       - "${DBPORT}:5432"
     volumes:
-      - ./postgres:/var/lib/postgresql/data
+      - /tmp/postgres:/var/lib/postgresql/data
     networks:
       - app-network
   
