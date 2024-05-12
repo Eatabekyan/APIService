@@ -110,7 +110,7 @@ Once the service is running, you will find scripts and request examples for each
 
 Before checking user access, the "client service" must obtain a `TOKEN` from the OAuth2 server running on port 9096.
 
-Here is a shell script example of how to obtain a Token using `clientId` and `secret`:
+Here is a shell script example of how to obtain a Token using `clientId` and `secret` for task manager (`clientId`=000000, `secret`=999999):
 
 ```bash
 curl -X POST   http://localhost:9096/token   -H 'Content-Type: application/x-www-form-urlencoded'   -d 'grant_type=client_credentials&client_id=000000&client_secret=999999'
