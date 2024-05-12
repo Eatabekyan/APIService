@@ -1,3 +1,2 @@
-/postgres
-/accessing/logs
-/mocks/logs
+service/accessing/logs
+service/mocks/logs

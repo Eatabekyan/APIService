@@ -188,3 +188,12 @@ curl -d @archive_manager_request.json -H 'Content-Type:application/json' http://
 
 **Response:** "Access Accepted" or "Access Denied".
 
+## How it works
+
+### ***How each service is connected to each other and by which port:***
+
+![GitHub Image](./diagrams/diagram1.png)
+
+### ***How it works when user sends request to service***
+
+![GitHub Image](./diagrams/diagram2.png)
