@@ -195,6 +195,6 @@ curl -d @archive_manager_request.json -H 'Content-Type:application/json' http://
 
 ![GitHub Image](./diagrams/diagram1.png)
 
-### ***How it works when user sends request to service***
+### ***How it works when user sends request to client service***
 
 ![GitHub Image](./diagrams/diagram2.png)
