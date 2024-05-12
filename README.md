@@ -8,6 +8,7 @@
 
 *To run the service:*
 ```bash
+cd service
 docker-compose build
 docker-compose up
 ```
