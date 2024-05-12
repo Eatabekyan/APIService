@@ -191,7 +191,7 @@ curl -d @archive_manager_request.json -H 'Content-Type:application/json' http://
 
 ## How it works
 
-### ***How each service is connected to each other and by which port:***
+### ***How each service is connected to other services:***
 
 ![GitHub Image](./diagrams/diagram1.png)
 
