@@ -6,11 +6,11 @@ type AccessServices struct {
 }
 
 type ArchiveManager struct {
-	Records []string `json:"records",omitempty`
+	Records []string `json:"access",omitempty`
 }
 
 type TaskManager struct {
-	Agents []string `json:"agents,omitempty"`
+	Agents []string `json:"access",omitempty`
 }
 
 type User struct {

@@ -1,4 +1,33 @@
 services:
+  task_mock:
+    image: task_mock
+    build:
+      context: ./mocks/task_manager
+      dockerfile: Dockerfile
+    env_file:
+     - .env 
+    ports:
+      - ${TASK_PORT}:${TASK_PORT}
+    volumes:
+      - ./mocks/logs/task_logs:/task_manager/logs
+    networks:
+      - app-network
+    
+  archive_mock:
+    image: archive_mock
+    build:
+      context: ./mocks/archive_manager
+      dockerfile: Dockerfile
+    env_file:
+     - .env 
+    ports:
+      - ${ARCHIVE_PORT}:${ARCHIVE_PORT}
+    volumes:
+      - ./mocks/logs/archive_logs:/archive_manager/logs
+    networks:
+      - app-network
+      
+
   accessing:
     image: accessing
     build:
@@ -35,6 +64,8 @@ services:
       POSTGRES_USER: ${DBUSER}
       POSTGRES_DB: ${DBNAME}
       POSTGRES_PASSWORD: ${DBPASSWORD}
+    env_file:
+      - .env
     ports:
       - "${DBPORT}:5432"
     volumes:
@@ -45,8 +76,12 @@ services:
   adminer:
     image: adminer:4.8.1
     restart: always
+    env_file:
+      - .env
     ports:
       - ${ADMINER_PORT}:8080
+    networks:
+      - app-network
 
 networks:
   app-network:

@@ -7,10 +7,15 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
 )
+
+type ResponseStruct struct {
+	Access []string `json:"access"`
+}
 
 func getUserFromAdminRequest(log *log.Logger, ctx *gin.Context) (*dbtypes.User, error) {
 	data, err := ctx.GetRawData()
@@ -48,20 +53,23 @@ func getClientRequestInfo(log *log.Logger, ctx *gin.Context) (*dbtypes.ClientReq
 
 func checkToken(log *log.Logger, token string) (service string, err error) {
 	oauthHost := os.Getenv("OAUTH_SERVER_HOST")
-	oauthPort := os.Getenv("OAUTH_SERVER_PORT")
+	oauthPort, err := strconv.Atoi(os.Getenv("OAUTH_SERVER_PORT"))
+	if err != nil {
+		log.Warning(fmt.Sprintf("Error : %v\n", err))
+		return
+	}
 	myClientId := os.Getenv("MY_CLIENT_ID")
 	mySecret := os.Getenv("MY_SECRET")
 	url := fmt.Sprintf(
-		"http://$1:$2/check-token?grant_type=client_credentials&client_id=$3&client_secret=$4",
+		"http://%s:%d/check-token?grant_type=client_credentials&client_id=%s&client_secret=%s",
 		oauthHost,
 		oauthPort,
 		myClientId,
 		mySecret,
 	)
-
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
-		fmt.Println(err)
+		log.Warning(fmt.Sprintf("Error : %v\n", err))
 		return
 	}
 	req.Header.Set("Authorization", "Bearer "+token)
@@ -76,7 +84,7 @@ func checkToken(log *log.Logger, token string) (service string, err error) {
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		fmt.Println(err)
+		log.Warning(fmt.Sprintf("Error : %v\n", err))
 		return
 	}
 
@@ -94,8 +102,6 @@ func GetUserAccessToService(log *log.Logger, user *dbtypes.User, service string)
 	if err != nil {
 		return nil, err
 	}
-	log.Warning(service)
-	log.Warning(string(data))
 	access := map[string]map[string][]string{}
 	err = json.Unmarshal(data, &access)
 	if err != nil {
@@ -104,5 +110,5 @@ func GetUserAccessToService(log *log.Logger, user *dbtypes.User, service string)
 	if _, ok := access[service]; !ok {
 		return nil, fmt.Errorf("no access to service %s", service)
 	}
-	return access[service]["agents"], nil
+	return access[service]["access"], nil
 }

@@ -34,10 +34,10 @@ curl -d @insertRequest.json -H 'Content-Type:application/json' http://localhost:
 	"username":"admin",
 	"services":{
 		"archive_manager":{
-                        "records":["record1","record2","record3","record4","record5","record0"]
+                        "access":["record1","record2","record3","record4","record5","record0"]
                 },
 		"task_manager":{
-                        "agents":["agent7","agent3","agent0"]
+                        "access":["agent7","agent3","agent0"]
                 }
 	}	
 }
@@ -69,10 +69,10 @@ curl -d @addServicesRequest.json -H 'Content-Type:application/json' http://local
 	"username":"admin",
 	"services":{
 		"archive_manager":{
-                        "records":["newrecord1","newrecord2","newrecord3"]
+                        "access":["newrecord1","newrecord2","newrecord3"]
                 },
 		"task_manager":{
-                        "agents":["newagent1","newagent2","newagent0"]
+                        "access":["newagent1","newagent2","newagent0"]
                 }
 	}	
 }
@@ -90,10 +90,10 @@ curl -d @removeServicesRequest.json -H 'Content-Type:application/json' http://lo
 	"username":"admin",
 	"services":{
 		"archive_manager":{
-                        "records":["oldrecord1","oldrecord2","oldrecord3"]
+                        "access":["oldrecord1","oldrecord2","oldrecord3"]
                 },
 		"task_manager":{
-                        "agents":["oldagent1","oldagent2","oldagent0"]
+                        "access":["oldagent1","oldagent2","oldagent0"]
                 }
 	}	
 }
@@ -149,3 +149,42 @@ curl -d @clientRequest.json -H 'Content-Type:application/json' http://localhost:
 
 `Important:`
         After running project all the logs of accessing service are written in */logs/service_logs.log*
+
+###  Mocks for Task Manager & Archive Manager
+
+##### To test service work you can send requests to mocks
+
+#### Task Manager Mock
+
+***Script to send request as user that wants access to some agent:***
+```bash
+curl -d @task_manager_request.json -H 'Content-Type:application/json' http://localhost:5050/requestTask
+```
+
+***task_manager_request.json***:
+```json
+{
+	"user": "admin",
+	"agent": "some_agent"
+}
+```
+
+**Response:** "Access Accepted" or "Access Denied".
+
+#### Archive Manager Mock
+
+***Script to send request as user that wants access to some record:***
+```bash
+curl -d @archive_manager_request.json -H 'Content-Type:application/json' http://localhost:6060/requestArchive
+```
+
+***archive_manager_request.json***:
+```json
+{
+	"user": "admin",
+	"record": "record"
+}
+```
+
+**Response:** "Access Accepted" or "Access Denied".
+

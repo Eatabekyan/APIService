@@ -69,7 +69,7 @@ func main() {
 	})
 
 	http.HandleFunc("/check-token", func(w http.ResponseWriter, r *http.Request) {
-		
+
 		token, err := srv.ValidationBearerToken(r)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusBadRequest)
